@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal | Wave Dental Studio</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="Wave Dental Studio.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: {
+                            950: '#061c14',
+                            900: '#09291e',
+                            800: '#0f3d2d',
+                            700: '#17523d',
+                            600: '#206b51',
+                        },
+                        gold: {
+                            400: '#fbe2b1',
+                            500: '#e8c274',
+                            600: '#d1a750',
+                            700: '#b08739'
+                        },
+                        cyan: {
+                            400: '#5eead4',
+                            500: '#38bdf8',
+                            600: '#0284c7'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #061c14;
+            color: #f8fafc;
+            position: relative;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fbe2b1 0%, #e8c274 50%, #d1a750 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #e8c274 0%, #d1a750 100%);
+        }
+        .glass-card {
+            background: rgba(15, 61, 45, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+        }
+        .glass-card:hover {
+            border-color: rgba(232, 194, 116, 0.65);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.35);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-[#061c14] text-slate-100 min-h-screen flex flex-col justify-between selection:bg-gold-500 selection:text-forest-950">
+
+    <!-- Global Watermark Layer -->
+    <div class="fixed inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden">
+        <img src="Wave Dental Studio.png" alt="Full Page Watermark" class="w-[950px] max-w-none opacity-[0.50] select-none filter blur-[0.5px]">
+    </div>
+
+    <!-- Top Bar -->
+    <header class="bg-forest-900 border-b border-forest-700 px-6 py-4 flex items-center justify-between gap-4 relative z-10">
+        <div class="flex items-center gap-3 group cursor-pointer">
+            <div class="w-20 h-20 rounded-xl group-hover:scale-105 transition flex items-center justify-center overflow-hidden">
+                <img src="Wave Dental Studio Logo.png" alt="Wave Dental Studio W Logo" class="w-full h-full object-cover">
+            </div>
+            <div class="flex flex-col">
+                <div class="flex items-center gap-1.5">
+                    <span class="font-serif text-lg tracking-wider font-bold gold-gradient-text">WAVE</span>
+                    <style>
+                        @keyframes spinSlow {
+                            from { transform: rotate(0deg); }
+                            to { transform: rotate(360deg); }
+                        }
+                        .animate-spin-slow {
+                            animation: spinSlow 8s linear infinite;
+                        }
+                    </style>
+                    <i class="fas fa-tooth text-xl bg-gradient-to-br from-[#e2b866] via-[#bfa15f] to-[#2fb5c8] bg-clip-text text-transparent animate-spin-slow inline-block"></i>
+                </div>
+                <span class="text-[9px] tracking-[0.25em] text-[#2fb5c8] uppercase font-semibold">Admin Portal</span>
+            </div>
+        </div>
+
+        <!-- Search Bar (Hidden until logged in) -->
+        <div id="adminHeaderSearchContainer" class="hidden md:flex items-center relative max-w-lg w-full mx-4 opacity-0 pointer-events-none transition-opacity duration-300">
+            <input type="text" id="adminSearchInput" oninput="filterAdminAppointments(this.value)" placeholder="Search patient name, phone number, doctor or treatment..." class="w-full pl-11 pr-4 py-2.5 rounded-2xl bg-forest-800 border border-forest-600 focus:border-gold-400 text-sm text-white outline-none shadow-lg">
+            <i class="fas fa-search absolute left-4 top-3.5 text-slate-400 text-sm"></i>
+            <div id="adminSuggestionsDropdown" class="hidden absolute top-full left-0 right-0 mt-2 rounded-2xl glass-card border border-gold-500/40 p-3 shadow-2xl max-h-64 overflow-y-auto z-50 space-y-2">
+            </div>
+        </div>
+
+        <!-- Right Header Actions -->
+        <div id="adminHeaderActions" class="hidden md:flex items-center gap-2 opacity-0 pointer-events-none transition-opacity duration-300 flex-shrink-0 mr-2">
+            <button onclick="openNewPatientModal()" class="px-4 py-2 rounded-xl gold-gradient-bg text-forest-950 font-semibold text-xs shadow-md hover:opacity-95 transition flex items-center gap-2">
+                <i class="fas fa-user-plus"></i> Add Appointment
+            </button>
+            <button id="adminLogoutBtn" onclick="openLogoutModal()" class="px-4 py-2 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 text-xs font-semibold border border-rose-500/40 transition flex items-center gap-2">
+                <i class="fas fa-sign-out-alt"></i> Secure Logout
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow flex items-center justify-center p-4 relative z-10">
+        <div class="w-full max-w-7xl">
+            
+            <!-- STEP 1: Admin Email Input -->
+            <div id="adminStepEmail" class="glass-card w-full max-w-lg mx-auto rounded-3xl p-8 border border-gold-500/40 shadow-2xl space-y-6">
+                <div class="text-center space-y-2">
+                    <div class="w-16 h-16 rounded-2xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-2xl mx-auto border border-gold-500/40">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h2 class="font-serif text-2xl font-bold text-white">Authorized Admin Access</h2>
+                    <p class="text-slate-300 text-xs">Enter your authorized clinic admin email to receive a secure 6-digit verification OTP via email.</p>
+                </div>
+
+                <form onsubmit="handleAdminEmailSubmit(event)" class="space-y-4">
+                    <div class="relative pt-2">
+                        <input type="email" id="adminEmailInput" required placeholder=" " class="peer w-full px-4 pt-5 pb-3 rounded-xl bg-forest-900 border border-forest-700 outline-none focus:border-gold-400 text-white text-sm placeholder-transparent">
+                        <label for="adminEmailInput" class="absolute left-4 top-1.5 text-xs text-gold-400 bg-forest-900 px-1 pointer-events-none">Admin Email Address</label>
+                    </div>
+
+                    <div id="adminEmailError" class="hidden p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-200 text-xs"></div>
+
+                    <button type="submit" id="sendOtpBtn" class="w-full py-3.5 rounded-xl gold-gradient-bg text-forest-950 font-bold text-sm shadow-lg hover:opacity-95 transition flex items-center justify-center gap-2">
+                        <span id="sendOtpBtnText">Send 6-Digit OTP</span>
+                        <div id="sendOtpSpinner" class="hidden w-5 h-5 border-2 border-forest-950 border-t-transparent rounded-full animate-spin"></div>
+                    </button>
+                </form>
+            </div>
+
+            <!-- STEP 2: OTP Verification -->
+            <div id="adminStepOtp" class="hidden glass-card w-full max-w-lg mx-auto rounded-3xl p-8 border border-gold-500/40 shadow-2xl space-y-6">
+                <div class="text-center space-y-2">
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-2xl mx-auto border border-cyan-500/40">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h2 class="font-serif text-2xl font-bold text-white">Enter Security OTP</h2>
+                    <p class="text-slate-300 text-xs">A verification code has been dispatched to <strong id="displayAdminEmail" class="text-gold-300"></strong>.</p>
+                </div>
+
+                <form id="otpVerifyForm" onsubmit="handleAdminOtpSubmit(event)" class="space-y-4">
+                    <div class="relative pt-2">
+                        <input type="text" id="adminOtpInput" required maxlength="6" placeholder=" " class="peer w-full px-4 pt-5 pb-3 rounded-xl bg-forest-900 border border-forest-700 outline-none focus:border-gold-400 text-white text-center text-xl tracking-[0.5em] font-mono placeholder-transparent">
+                        <label for="adminOtpInput" class="absolute left-4 top-1.5 text-xs text-gold-400 bg-forest-900 px-1 pointer-events-none">6-Digit OTP Code</label>
+                    </div>
+
+                    <div id="adminOtpError" class="hidden p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-200 text-xs text-center"></div>
+                    <div id="resendOtpSuccessMsg" class="hidden p-2.5 rounded-xl bg-green-500/20 border border-green-500/40 text-green-200 text-xs text-center font-medium">New OTP code sent successfully!</div>
+
+                    <button type="submit" id="verifyOtpBtn" class="w-full py-3.5 rounded-xl gold-gradient-bg text-forest-950 font-bold text-sm shadow-lg hover:opacity-95 transition flex items-center justify-center gap-2">
+                        <span id="verifyOtpBtnText">Verify & Open Dashboard</span> <i class="fas fa-lock-open"></i>
+                    </button>
+                    
+                    <div class="flex items-center justify-between pt-2 text-xs">
+                        <button type="button" onclick="backToAdminEmail()" class="text-slate-400 hover:text-gold-300 underline">Change Admin Email</button>
+                        <button type="button" id="resendOtpBtn" onclick="resendOtpCode()" class="text-gold-400 hover:text-gold-300 font-semibold">Resend OTP</button>
+                    </div>
+                </form>
+
+                <!-- OTP Verification Loading Spinner State -->
+                <div id="otpVerifyLoading" class="hidden text-center py-6 space-y-3">
+                    <div class="relative w-12 h-12 mx-auto">
+                        <div class="absolute inset-0 rounded-full border-4 border-forest-700"></div>
+                        <div class="absolute inset-0 rounded-full border-4 border-cyan-400 border-t-transparent animate-spin"></div>
+                    </div>
+                    <p class="text-xs text-slate-300 font-medium">Verifying security credentials...</p>
+                </div>
+            </div>
+
+            <!-- STEP 3: Admin Dashboard -->
+            <div id="adminStepDashboard" class="hidden glass-card w-full rounded-3xl p-8 sm:p-10 border border-gold-500/40 shadow-2xl space-y-8">
+                <div class="border-b border-forest-700 pb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div>
+                        <h2 class="font-serif text-3xl font-bold text-white flex items-center gap-3">
+                            <i class="fas fa-chart-line text-gold-400"></i> Clinic Management & Appointments
+                        </h2>
+                        <p class="text-slate-300 text-xs mt-1">Overview of clinic operations, schedule management, and patient reservations.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-forest-900 border border-forest-700 flex items-center gap-4 self-start sm:self-auto">
+                        <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Total Appointments:</span>
+                        <div id="statTotalCount" class="font-serif text-2xl font-bold text-gold-300">2</div>
+                    </div>
+                </div>
+
+                <!-- Appointments Table -->
+                <div class="space-y-4 pt-2">
+                    <h3 class="font-semibold text-base text-white flex items-center gap-2">
+                        <i class="fas fa-calendar-check text-gold-400"></i> All Patient Reservations (Click any row to view details, reschedule, or add follow-up)
+                    </h3>
+                    <div class="overflow-x-auto rounded-2xl border border-forest-700">
+                        <table class="w-full text-left text-sm text-slate-200">
+                            <thead class="bg-forest-950 text-gold-300 uppercase tracking-wider border-b border-forest-700">
+                                <tr>
+                                    <th class="p-4 font-semibold">Patient Name</th>
+                                    <th class="p-4 font-semibold">Phone</th>
+                                    <th class="p-4 font-semibold">Service</th>
+                                    <th class="p-4 font-semibold">Doctor</th>
+                                    <th class="p-4 font-semibold">Date & Slot</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminAppointmentsTableBody" class="divide-y divide-forest-800">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Patient Details & Reschedule Modal -->
+    <div id="patientDetailsModal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#061c14]/90 backdrop-blur-md p-4 hidden">
+        <div class="glass-card w-full max-w-lg rounded-3xl p-8 relative border border-gold-500/40 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto no-scrollbar">
+            <div class="absolute inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden">
+                <img src="Wave Dental Studio.png" alt="Modal Watermark" class="w-[450px] max-w-none opacity-[0.15] select-none filter blur-[0.5px]">
+            </div>
+
+            <button onclick="closePatientDetailsModal()" class="absolute top-6 right-6 text-slate-300 hover:text-gold-300 text-xl font-bold transition z-20">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="text-center space-y-2 relative z-10">
+                <div class="w-14 h-14 rounded-2xl bg-gold-500/25 text-gold-400 flex items-center justify-center text-xl mx-auto border border-gold-500/40">
+                    <i class="fas fa-user-injured"></i>
+                </div>
+                <h3 class="font-serif text-2xl font-bold text-white">Patient Record Details</h3>
+                <p class="text-slate-300 text-xs">Review full details or reschedule/book next sitting below.</p>
+            </div>
+
+            <div class="space-y-3 bg-forest-900/90 p-5 rounded-2xl border border-forest-700 text-xs relative z-10">
+                <div class="flex justify-between border-b border-forest-800 pb-2">
+                    <span class="text-slate-400">Patient Full Name:</span>
+                    <span id="modalPatientName" class="font-semibold text-white"></span>
+                </div>
+                <div class="flex justify-between border-b border-forest-800 pb-2">
+                    <span class="text-slate-400">Phone Number:</span>
+                    <span id="modalPatientPhone" class="font-mono text-cyan-300"></span>
+                </div>
+                <div class="flex justify-between border-b border-forest-800 pb-2">
+                    <span class="text-slate-400">Treatment Service:</span>
+                    <span id="modalPatientService" class="font-semibold text-gold-300"></span>
+                </div>
+                <div class="flex justify-between border-b border-forest-800 pb-2">
+                    <span class="text-slate-400">Treating Doctor:</span>
+                    <span id="modalPatientDoctor" class="text-white"></span>
+                </div>
+                <div class="flex justify-between border-b border-forest-800 pb-2">
+                    <span class="text-slate-400">Current Date & Slot:</span>
+                    <span id="modalPatientDateTime" class="text-cyan-400"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Special Notes:</span>
+                    <span id="modalPatientNotes" class="text-slate-300 italic">None</span>
+                </div>
+            </div>
+
+            <form onsubmit="handleModalActionSubmit(event)" class="space-y-4 pt-2 relative z-10">
+                <div class="grid grid-cols-2 gap-3">
+                    <button type="button" onclick="switchModalMode('reschedule')" id="modeRescheduleBtn" class="py-2.5 rounded-xl bg-forest-800 border border-gold-500 text-gold-300 font-semibold text-xs transition">
+                        <i class="fas fa-calendar-alt mr-1"></i> Reschedule Current
+                    </button>
+                    <button type="button" onclick="switchModalMode('next')" id="modeNextBtn" class="py-2.5 rounded-xl bg-forest-900 border border-forest-700 text-slate-300 font-semibold text-xs transition hover:border-gold-400">
+                        <i class="fas fa-plus-circle mr-1"></i> Book Next Sitting
+                    </button>
+                </div>
+
+                <div id="rescheduleSection" class="space-y-3 pt-1">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[10px] text-slate-400 mb-1">New Date</label>
+                            <input type="date" id="rescheduleDate" class="w-full px-3 py-2 rounded-xl bg-forest-900 border border-forest-700 text-white text-xs outline-none focus:border-gold-400">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-slate-400 mb-1">New Slot</label>
+                            <select id="rescheduleSlot" class="w-full px-3 py-2 rounded-xl bg-forest-900 border border-forest-700 text-white text-xs outline-none focus:border-gold-400">
+                                <option value="09:00 AM - 10:30 AM">09:00 AM - 10:30 AM</option>
+                                <option value="11:00 AM - 12:30 PM">11:00 AM - 12:30 PM</option>
+                                <option value="02:00 PM - 03:30 PM">02:00 PM - 03:30 PM</option>
+                                <option value="04:30 PM - 06:00 PM">04:30 PM - 06:00 PM</option>
+                                <option value="06:30 PM - 08:00 PM">06:30 PM - 08:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="nextSittingSection" class="space-y-3 pt-1 hidden">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[10px] text-slate-400 mb-1">Next Sitting Date</label>
+                            <input type="date" id="nextDate" class="w-full px-3 py-2 rounded-xl bg-forest-900 border border-forest-700 text-white text-xs outline-none focus:border-gold-400">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-slate-400 mb-1">Next Sitting Slot</label>
+                            <select id="nextSlot" class="w-full px-3 py-2 rounded-xl bg-forest-900 border border-forest-700 text-white text-xs outline-none focus:border-gold-400">
+                                <option value="09:00 AM - 10:30 AM">09:00 AM - 10:30 AM</option>
+                                <option value="11:00 AM - 12:30 PM">11:00 AM - 12:30 PM</option>
+                                <option value="02:00 PM - 03:30 PM">02:00 PM - 03:30 PM</option>
+                                <option value="04:30 PM - 06:00 PM">04:30 PM - 06:00 PM</option>
+                                <option value="06:30 PM - 08:00 PM">06:30 PM - 08:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="rescheduleSuccessMsg" class="hidden p-2.5 rounded-xl bg-green-500/20 border border-green-500/40 text-green-200 text-xs text-center font-medium">
+                    <i class="fas fa-check-circle mr-1"></i> <span id="successMsgText">Appointment successfully updated!</span>
+                </div>
+
+                <button type="submit" id="modalSubmitBtn" class="w-full py-3 rounded-xl gold-gradient-bg text-forest-950 font-bold text-xs shadow-lg hover:opacity-95 transition flex items-center justify-center gap-2">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- New Appointment Modal -->
+    <div id="newPatientModal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#061c14]/90 backdrop-blur-md p-4 hidden">
+        <div class="glass-card w-full max-w-xl rounded-3xl p-8 relative border border-gold-500/40 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto no-scrollbar">
+            <!-- Modal Watermark -->
+            <div class="absolute inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden">
+                <img src="Wave Dental Studio.png" alt="Modal Watermark" class="w-[450px] max-w-none opacity-[0.15] select-none filter blur-[0.5px]">
+            </div>
+
+            <button onclick="closeNewPatientModal()" class="absolute top-6 right-6 text-slate-300 hover:text-gold-300 text-xl font-bold transition z-20">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="text-center space-y-2 relative z-10">
+                <div class="w-14 h-14 rounded-2xl bg-gold-500/25 text-gold-400 flex items-center justify-center text-xl mx-auto border border-gold-500/40">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h3 class="font-serif text-2xl font-bold text-white">Add New Appointment</h3>
+                <p class="text-slate-300 text-xs">Enter patient details to record a new clinic visit.</p>
+            </div>
+
+            <!-- New Patient Form -->
+            <form id="newPatientForm" onsubmit="handleNewPatientSubmit(event)" class="space-y-4 relative z-10">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <!-- Patient Name -->
+                    <div class="relative pt-2">
+                        <input type="text" id="newPatientName" required placeholder=" " class="peer w-full px-4 pt-5 pb-3 rounded-xl bg-forest-900 border border-forest-700 outline-none focus:border-gold-400 text-white text-xs placeholder-transparent">
+                        <label for="newPatientName" class="absolute left-4 top-3 text-slate-400 text-xs transition-all duration-200 pointer-events-none peer-placeholder-shown:top-5 peer-placeholder-shown:text-xs peer-placeholder-shown:text-slate-400 peer-focus:top-1.5 peer-focus:text-[10px] peer-focus:text-gold-400 peer-not-placeholder-shown:top-1.5 peer-not-placeholder-shown:text-[10px] peer-not-placeholder-shown:text-gold-400 bg-forest-900 px-1">Patient Full Name</label>
+                    </div>
+                    <!-- Phone Number -->
+                    <div class="relative pt-2">
+                        <input type="tel" id="newPatientPhone" required maxlength="10" placeholder=" " class="peer w-full px-4 pt-5 pb-3 rounded-xl bg-forest-900 border border-forest-700 outline-none focus:border-gold-400 text-white text-xs placeholder-transparent">
+                        <label for="newPatientPhone" class="absolute left-4 top-3 text-slate-400 text-xs transition-all duration-200 pointer-events-none peer-placeholder-shown:top-5 peer-placeholder-shown:text-xs peer-placeholder-shown:text-slate-400 peer-focus:top-1.5 peer-focus:text-[10px] peer-focus:text-gold-400 peer-not-placeholder-shown:top-1.5 peer-not-placeholder-shown:text-[10px] peer-not-placeholder-shown:text-gold-400 bg-forest-900 px-1">Phone Number (10 Digits)</label>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="relative pt-2">
+                        <select id="newPatientService" class="peer w-full px-4 pt-5 pb-3 rounded-xl bg-forest-900 border border-forest-700 outline-none focus:border-gold-400 text-white text-xs">
+                            <option value="Advanced Dental Implants">Advanced Dental Implants</option>
+                            <option value="Orthodontics & Invisalign">Orthodontics & Invisalign</option>
+                            <option value="Laser Smile Makeover">Laser Smile Makeover</option>
+                            <option value="Painless Root Canal">Painless Root Canal</option>
+                        </select>
+                        <label for="newPatientService" class="absolute left-4 top-1.5 text-[10px] text-gold-400 bg-forest-900 px-1 pointer-events-none">Treatment Service</label>
+                    </div>
+                    <div class="relative pt-2">
+                        <select id="newPatientDoctor" class="peer w-full px-4 pt-5 pb-3 rounded-xl bg-forest-900 border border-forest-700 outline-none focus:border-gold-400 text-white text-xs">
+                            <option value="Any Available Expert">Any Available Expert</option>
+                            <option value="Dr. Alistair Vance">Dr. Alistair Vance</option>
+                            <option value="Dr. Maya Lin">Dr. Maya Lin</option>
+                            <option value="Dr. Rajesh Kumar">Dr. Rajesh Kumar</option>
+                        </select>
+                        <label for="newPatientDoctor" class="absolute left-4 top-1.5 text-[10px] text-gold-400 bg-forest-900 px-1 pointer-events-none">Treating Doctor</label>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="relative pt-2">
+                        <input type="date" id="newPatientDate" required class="peer w-full px-4 pt-5 pb-3 rounded-xl bg-forest-900 border border-forest-700 outline-none focus:border-gold-400 text-white text-xs">
+                        <label for="newPatientDate" class="absolute left-4 top-1.5 text-[10px] text-gold-400 bg-forest-900 px-1 pointer-events-none">Date</label>
+                    </div>
+                    <div class="relative pt-2">
+                        <select id="newPatientSlot" class="peer w-full px-4 pt-5 pb-3 rounded-xl bg-forest-900 border border-forest-700 outline-none focus:border-gold-400 text-white text-xs">
+                            <option value="09:00 AM - 10:30 AM">09:00 AM - 10:30 AM</option>
+                            <option value="11:00 AM - 12:30 PM">11:00 AM - 12:30 PM</option>
+                            <option value="02:00 PM - 03:30 PM">02:00 PM - 03:30 PM</option>
+                            <option value="04:30 PM - 06:00 PM">04:30 PM - 06:00 PM</option>
+                            <option value="06:30 PM - 08:00 PM">06:30 PM - 08:00 PM</option>
+                        </select>
+                        <label for="newPatientSlot" class="absolute left-4 top-1.5 text-[10px] text-gold-400 bg-forest-900 px-1 pointer-events-none">Time Slot</label>
+                    </div>
+                </div>
+
+                <div class="relative pt-2">
+                    <input type="text" id="newPatientNotes" placeholder=" " class="peer w-full px-4 pt-5 pb-3 rounded-xl bg-forest-900 border border-forest-700 outline-none focus:border-gold-400 text-white text-xs placeholder-transparent">
+                    <label for="newPatientNotes" class="absolute left-4 top-5 text-slate-400 text-xs transition-all duration-200 pointer-events-none peer-placeholder-shown:top-5 peer-placeholder-shown:text-xs peer-placeholder-shown:text-slate-400 peer-focus:top-1.5 peer-focus:text-[10px] peer-focus:text-gold-400 peer-not-placeholder-shown:top-1.5 peer-not-placeholder-shown:text-[10px] peer-not-placeholder-shown:text-gold-400 bg-forest-900 px-1">Special Notes / Remarks</label>
+                </div>
+
+                <!-- Phone Length Error Warning Box -->
+                <div id="newPhoneErrorWarning" class="hidden p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-200 text-xs flex items-center gap-3">
+                    <i class="fas fa-exclamation-triangle text-base text-rose-400"></i>
+                    <div>
+                        <strong class="font-semibold block text-rose-100">Invalid Phone Number!</strong>
+                        <span>Please enter exactly a 10-digit phone number.</span>
+                    </div>
+                </div>
+
+                <!-- Error Warning Box for Overlaps -->
+                <div id="newOverlapWarning" class="hidden p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-200 text-xs flex items-center gap-3">
+                    <i class="fas fa-exclamation-triangle text-base text-rose-400"></i>
+                    <div>
+                        <strong class="font-semibold block text-rose-100">Time Slot Unavailable / Overlap!</strong>
+                        <span>The selected doctor already has a confirmed appointment at this date and time slot.</span>
+                    </div>
+                </div>
+
+                <button type="submit" id="saveNewApptBtn" class="w-full py-3 rounded-xl gold-gradient-bg text-forest-950 font-bold text-xs shadow-lg hover:opacity-95 transition flex items-center justify-center gap-2">
+                    <span id="saveNewApptText"><i class="fas fa-check"></i> Save New Appointment</span>
+                </button>
+            </form>
+
+            <!-- Loading Spinner State (Hidden by default) -->
+            <div id="newApptLoading" class="hidden text-center py-8 space-y-4 relative z-10">
+                <div class="relative w-12 h-12 mx-auto">
+                    <div class="absolute inset-0 rounded-full border-4 border-forest-700"></div>
+                    <div class="absolute inset-0 rounded-full border-4 border-gold-400 border-t-transparent animate-spin"></div>
+                </div>
+                <h4 class="font-serif text-lg font-bold text-white">Booking New Appointment...</h4>
+            </div>
+
+            <!-- Success Confirmation State (Hidden by default) -->
+            <div id="newApptSuccess" class="hidden text-center py-6 space-y-5 relative z-10">
+                <div class="w-16 h-16 rounded-full bg-green-500/20 border border-green-500/40 text-green-400 flex items-center justify-center text-3xl mx-auto shadow-lg">
+                    <i class="fas fa-check"></i>
+                </div>
+                <div class="space-y-1">
+                    <h4 class="font-serif text-2xl font-bold text-white">Appointment Confirmed!</h4>
+                    <p class="text-slate-300 text-xs">New patient visit has been successfully scheduled and added to the clinic system.</p>
+                </div>
+                <button type="button" onclick="finishAndCloseNewAppointment()" class="w-40 mx-auto py-2.5 rounded-xl gold-gradient-bg text-forest-950 font-bold text-xs shadow-lg hover:opacity-95 transition flex items-center justify-center gap-2">
+                    <i class="fas fa-check-circle"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <div id="logoutConfirmModal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#061c14]/90 backdrop-blur-md p-4 hidden">
+        <div class="glass-card w-full max-w-sm rounded-3xl p-8 relative border border-gold-500/40 shadow-2xl text-center space-y-6">
+            <div class="w-14 h-14 rounded-2xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-xl mx-auto border border-rose-500/40">
+                <i class="fas fa-sign-out-alt"></i>
+            </div>
+            
+            <!-- Question State -->
+            <div id="logoutPromptState" class="space-y-2">
+                <h3 class="font-serif text-xl font-bold text-white">Confirm Logout</h3>
+                <p class="text-slate-300 text-xs">Are you sure you want to log out of the admin portal?</p>
+                <div class="grid grid-cols-2 gap-3 pt-4">
+                    <button type="button" onclick="closeLogoutModal()" class="py-2.5 rounded-xl bg-forest-900 border border-forest-700 text-slate-300 font-semibold text-xs transition hover:border-gold-400">
+                        No
+                    </button>
+                    <button type="button" onclick="executeLogoutWithProgress()" class="py-2.5 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 font-semibold text-xs border border-rose-500/40 transition">
+                        Yes, Logout
+                    </button>
+                </div>
+            </div>
+
+            <!-- Loading Spinner State (Hidden by default) -->
+            <div id="logoutLoadingState" class="hidden py-4 space-y-3">
+                <div class="relative w-10 h-10 mx-auto">
+                    <div class="absolute inset-0 rounded-full border-4 border-forest-700"></div>
+                    <div class="absolute inset-0 rounded-full border-4 border-rose-400 border-t-transparent animate-spin"></div>
+                </div>
+                <p class="text-xs text-slate-300 font-medium">Signing out securely...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-forest-900 border-t border-forest-800 py-6 text-center text-xs text-slate-400 relative z-10">
+        <p>&copy; 2026 Wave Dental Studio Vizag. Secure Admin Environment.</p>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        const API_BASE_URL = "http://localhost:8000/api/admin";
+
+        const adminStepEmail = document.getElementById('adminStepEmail');
+        const adminStepOtp = document.getElementById('adminStepOtp');
+        const adminStepDashboard = document.getElementById('adminStepDashboard');
+        const adminEmailInput = document.getElementById('adminEmailInput');
+        const adminEmailError = document.getElementById('adminEmailError');
+        const adminOtpInput = document.getElementById('adminOtpInput');
+        const adminOtpError = document.getElementById('adminOtpError');
+        const displayAdminEmail = document.getElementById('displayAdminEmail');
+        const adminSuggestionsDropdown = document.getElementById('adminSuggestionsDropdown');
+        const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+
+        let bookedAppointments = [
+            { patientName: "Eleanor Sterling", patientPhone: "9505290644", service: "Advanced Dental Implants", doctor: "Dr. Alistair Vance", date: "2026-06-01", time: "09:00 AM - 10:30 AM", notes: "VIP Patient" },
+            { patientName: "Jagdish Varma", patientPhone: "9876543210", service: "Orthodontics & Invisalign", doctor: "Dr. Maya Lin", date: "2026-06-01", time: "11:00 AM - 12:30 PM", notes: "Regular checkup" }
+        ];
+
+        let currentSelectedIndex = null;
+        let activeModalMode = 'reschedule';
+
+        // Check 8-hour login persistence on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const loginSession = localStorage.getItem('waveAdminSession');
+            if (loginSession) {
+                const sessionData = JSON.parse(loginSession);
+                const currentTime = new Date().getTime();
+                const eightHours = 28800000;
+                if (currentTime - sessionData.timestamp < eightHours) {
+                    adminStepEmail.classList.add('hidden');
+                    adminStepOtp.classList.add('hidden');
+                    adminStepDashboard.classList.remove('hidden');
+                    
+                    const searchContainer = document.getElementById('adminHeaderSearchContainer');
+                    searchContainer.classList.remove('opacity-0', 'pointer-events-none');
+                    const headerActions = document.getElementById('adminHeaderActions');
+                    headerActions.classList.remove('opacity-0', 'pointer-events-none');
+                    
+                    renderAdminTable();
+                } else {
+                    localStorage.removeItem('waveAdminSession');
+                }
+            }
+            document.getElementById('newPatientDate').value = new Date().toISOString().split('T')[0];
+        });
+
+        async function handleAdminEmailSubmit(e) {
+            e.preventDefault();
+            const email = adminEmailInput.value.trim().toLowerCase();
+            const btnText = document.getElementById('sendOtpBtnText');
+            const spinner = document.getElementById('sendOtpSpinner');
+            
+            btnText.innerText = "Sending OTP...";
+            if(spinner) spinner.classList.remove('hidden');
+            adminEmailError.classList.add('hidden');
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/send-otp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    displayAdminEmail.innerText = email;
+                    adminStepEmail.classList.add('hidden');
+                    adminStepOtp.classList.remove('hidden');
+                } else {
+                    adminEmailError.innerText = data.message || "Access Denied: Email not recognized in authorized directory.";
+                    adminEmailError.classList.remove('hidden');
+                }
+            } catch (err) {
+                adminEmailError.innerText = "Error connecting to authentication server. Make sure Node.js server is running.";
+                adminEmailError.classList.remove('hidden');
+            } finally {
+                btnText.innerText = "Send 6-Digit OTP";
+                if(spinner) spinner.classList.add('hidden');
+            }
+        }
+
+        async function resendOtpCode() {
+            const email = adminEmailInput.value.trim().toLowerCase();
+            const resendSuccess = document.getElementById('resendOtpSuccessMsg');
+            const resendBtn = document.getElementById('resendOtpBtn');
+            resendBtn.innerText = "Resending...";
+            resendBtn.disabled = true;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/send-otp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    resendSuccess.classList.remove('hidden');
+                    setTimeout(() => resendSuccess.classList.add('hidden'), 4000);
+                } else {
+                    alert(data.message || "Failed to resend OTP.");
+                }
+            } catch (err) {
+                alert("Error connecting to server for resending OTP.");
+            } finally {
+                resendBtn.innerText = "Resend OTP";
+                resendBtn.disabled = false;
+            }
+        }
+
+        async function handleAdminOtpSubmit(e) {
+            e.preventDefault();
+            const email = adminEmailInput.value.trim().toLowerCase();
+            const otp = adminOtpInput.value.trim();
+            
+            const otpForm = document.getElementById('otpVerifyForm');
+            const otpLoading = document.getElementById('otpVerifyLoading');
+
+            otpForm.classList.add('hidden');
+            otpLoading.classList.remove('hidden');
+            adminOtpError.classList.add('hidden');
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/verify-otp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, otp })
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    const sessionData = { email: email, timestamp: new Date().getTime() };
+                    localStorage.setItem('waveAdminSession', JSON.stringify(sessionData));
+
+                    setTimeout(() => {
+                        otpLoading.classList.add('hidden');
+                        adminStepOtp.classList.add('hidden');
+                        adminStepDashboard.classList.remove('hidden');
+                        
+                        const searchContainer = document.getElementById('adminHeaderSearchContainer');
+                        searchContainer.classList.remove('opacity-0', 'pointer-events-none');
+                        const headerActions = document.getElementById('adminHeaderActions');
+                        headerActions.classList.remove('opacity-0', 'pointer-events-none');
+                        
+                        renderAdminTable();
+                        otpForm.reset();
+                        otpForm.classList.remove('hidden');
+                    }, 800);
+                } else {
+                    otpLoading.classList.add('hidden');
+                    otpForm.classList.remove('hidden');
+                    adminOtpError.innerText = data.message || "Invalid OTP code.";
+                    adminOtpError.classList.remove('hidden');
+                }
+            } catch (err) {
+                otpLoading.classList.add('hidden');
+                otpForm.classList.remove('hidden');
+                adminOtpError.innerText = "Error contacting verification server.";
+                adminOtpError.classList.remove('hidden');
+            }
+        }
+
+        function backToAdminEmail() {
+            adminStepOtp.classList.add('hidden');
+            adminStepEmail.classList.remove('hidden');
+        }
+
+        function openLogoutModal() {
+            document.getElementById('logoutPromptState').classList.remove('hidden');
+            document.getElementById('logoutLoadingState').classList.add('hidden');
+            document.getElementById('logoutConfirmModal').classList.remove('hidden');
+        }
+
+        function closeLogoutModal() {
+            document.getElementById('logoutConfirmModal').classList.add('hidden');
+        }
+
+        function executeLogoutWithProgress() {
+            document.getElementById('logoutPromptState').classList.add('hidden');
+            document.getElementById('logoutLoadingState').classList.remove('hidden');
+
+            setTimeout(() => {
+                closeLogoutModal();
+                logoutAdmin();
+            }, 1000);
+        }
+
+        function logoutAdmin() {
+            localStorage.removeItem('waveAdminSession');
+            adminStepDashboard.classList.add('hidden');
+            adminStepEmail.classList.remove('hidden');
+            adminEmailInput.value = ""; // Clears email input field on logout
+            adminOtpInput.value = "";
+            
+            const searchContainer = document.getElementById('adminHeaderSearchContainer');
+            searchContainer.classList.add('opacity-0', 'pointer-events-none');
+            const headerActions = document.getElementById('adminHeaderActions');
+            headerActions.classList.add('opacity-0', 'pointer-events-none');
+            document.getElementById('adminSearchInput').value = "";
+            adminSuggestionsDropdown.classList.add('hidden');
+        }
+
+        function switchModalMode(mode) {
+            activeModalMode = mode;
+            const resSection = document.getElementById('rescheduleSection');
+            const nextSection = document.getElementById('nextSittingSection');
+            const btnReschedule = document.getElementById('modeRescheduleBtn');
+            const btnNext = document.getElementById('modeNextBtn');
+            const submitBtn = document.getElementById('modalSubmitBtn');
+
+            if (mode === 'reschedule') {
+                resSection.classList.remove('hidden');
+                nextSection.classList.add('hidden');
+                btnReschedule.className = "py-2.5 rounded-xl bg-forest-800 border border-gold-500 text-gold-300 font-semibold text-xs transition";
+                btnNext.className = "py-2.5 rounded-xl bg-forest-900 border border-forest-700 text-slate-300 font-semibold text-xs transition hover:border-gold-400";
+                submitBtn.innerHTML = '<i class="fas fa-calendar-alt"></i> Save & Reschedule Appointment';
+            } else {
+                resSection.classList.add('hidden');
+                nextSection.classList.remove('hidden');
+                btnNext.className = "py-2.5 rounded-xl bg-forest-800 border border-cyan-400 text-cyan-300 font-semibold text-xs transition";
+                btnReschedule.className = "py-2.5 rounded-xl bg-forest-900 border border-forest-700 text-slate-300 font-semibold text-xs transition hover:border-gold-400";
+                submitBtn.innerHTML = '<i class="fas fa-plus-circle"></i> Confirm Next Sitting Booking';
+            }
+            document.getElementById('rescheduleSuccessMsg').classList.add('hidden');
+        }
+
+        function openPatientModal(index) {
+            currentSelectedIndex = index;
+            const app = bookedAppointments[index];
+            document.getElementById('modalPatientName').innerText = app.patientName;
+            document.getElementById('modalPatientPhone').innerText = app.patientPhone;
+            document.getElementById('modalPatientService').innerText = app.service;
+            document.getElementById('modalPatientDoctor').innerText = app.doctor;
+            document.getElementById('modalPatientDateTime').innerText = `${app.date} (${app.time})`;
+            document.getElementById('modalPatientNotes').innerText = app.notes || 'None';
+            document.getElementById('rescheduleDate').value = app.date;
+            document.getElementById('rescheduleSlot').value = app.time;
+            document.getElementById('nextDate').value = new Date().toISOString().split('T')[0];
+            
+            switchModalMode('reschedule');
+            document.getElementById('rescheduleSuccessMsg').classList.add('hidden');
+            document.getElementById('patientDetailsModal').classList.remove('hidden');
+        }
+
+        function closePatientDetailsModal() {
+            document.getElementById('patientDetailsModal').classList.add('hidden');
+        }
+
+        function openNewPatientModal() {
+            document.getElementById('newPatientForm').classList.remove('hidden');
+            document.getElementById('newApptLoading').classList.add('hidden');
+            document.getElementById('newApptSuccess').classList.add('hidden');
+            document.getElementById('newPatientModal').classList.remove('hidden');
+        }
+
+        function closeNewPatientModal() {
+            document.getElementById('newPatientModal').classList.add('hidden');
+        }
+
+        function handleNewPatientSubmit(e) {
+            e.preventDefault();
+            const phone = document.getElementById('newPatientPhone').value.trim();
+            const doctor = document.getElementById('newPatientDoctor').value;
+            const date = document.getElementById('newPatientDate').value;
+            const time = document.getElementById('newPatientSlot').value;
+
+            const phoneError = document.getElementById('newPhoneErrorWarning');
+            const overlapError = document.getElementById('newOverlapWarning');
+
+            // Validate 10-digit phone
+            const phoneDigitsOnly = phone.replace(/\D/g, '');
+            if (phoneDigitsOnly.length !== 10) {
+                phoneError.classList.remove('hidden');
+                overlapError.classList.add('hidden');
+                return;
+            }
+            phoneError.classList.add('hidden');
+
+            // Check overlap
+            if (doctor !== "Any Available Expert") {
+                const isOverlap = bookedAppointments.some(appt => appt.doctor === doctor && appt.date === date && appt.time === time);
+                if (isOverlap) {
+                    overlapError.classList.remove('hidden');
+                    return;
+                }
+            }
+            overlapError.classList.add('hidden');
+
+            const formEl = document.getElementById('newPatientForm');
+            const loadingEl = document.getElementById('newApptLoading');
+            const successEl = document.getElementById('newApptSuccess');
+
+            formEl.classList.add('hidden');
+            loadingEl.classList.remove('hidden');
+
+            setTimeout(() => {
+                loadingEl.classList.add('hidden');
+                successEl.classList.remove('hidden');
+
+                const newApp = {
+                    patientName: document.getElementById('newPatientName').value,
+                    patientPhone: phone,
+                    service: document.getElementById('newPatientService').value,
+                    doctor: doctor,
+                    date: date,
+                    time: time,
+                    notes: document.getElementById('newPatientNotes').value || 'New walk-in / online booking'
+                };
+
+                bookedAppointments.push(newApp);
+                renderAdminTable(bookedAppointments);
+            }, 1000);
+        }
+
+        function finishAndCloseNewAppointment() {
+            const formEl = document.getElementById('newPatientForm');
+            const successEl = document.getElementById('newApptSuccess');
+
+            successEl.classList.add('hidden');
+            formEl.classList.remove('hidden');
+            formEl.reset();
+            document.getElementById('newPatientDate').value = new Date().toISOString().split('T')[0];
+            closeNewPatientModal();
+        }
+
+        function handleModalActionSubmit(e) {
+            e.preventDefault();
+            if (currentSelectedIndex === null) return;
+            const successBox = document.getElementById('rescheduleSuccessMsg');
+            const successText = document.getElementById('successMsgText');
+
+            if (activeModalMode === 'reschedule') {
+                const newDate = document.getElementById('rescheduleDate').value;
+                const newSlot = document.getElementById('rescheduleSlot').value;
+
+                bookedAppointments[currentSelectedIndex].date = newDate;
+                bookedAppointments[currentSelectedIndex].time = newSlot;
+
+                document.getElementById('modalPatientDateTime').innerText = `${newDate} (${newSlot})`;
+                successText.innerText = "Appointment successfully rescheduled!";
+            } else {
+                const parentApp = bookedAppointments[currentSelectedIndex];
+                const nextDate = document.getElementById('nextDate').value;
+                const nextSlot = document.getElementById('nextSlot').value;
+
+                const newSitting = {
+                    patientName: parentApp.patientName,
+                    patientPhone: parentApp.patientPhone,
+                    service: parentApp.service + " (Follow-up Sitting)",
+                    doctor: parentApp.doctor,
+                    date: nextDate,
+                    time: nextSlot,
+                    notes: "Next sitting follow-up appointment"
+                };
+
+                bookedAppointments.push(newSitting);
+                successText.innerText = "Next sitting appointment successfully booked!";
+            }
+
+            successBox.classList.remove('hidden');
+            renderAdminTable(bookedAppointments);
+
+            setTimeout(() => {
+                closePatientDetailsModal();
+            }, 1200);
+        }
+
+        function filterAdminAppointments(query) {
+            const trimmed = query.trim().toLowerCase();
+            if (!trimmed) {
+                renderAdminTable(bookedAppointments);
+                adminSuggestionsDropdown.classList.add('hidden');
+                adminSuggestionsDropdown.innerHTML = "";
+                return;
+            }
+            const filtered = bookedAppointments.map((app, originalIndex) => ({ ...app, originalIndex })).filter(app => 
+                app.patientName.toLowerCase().includes(trimmed) ||
+                app.patientPhone.toLowerCase().includes(trimmed) ||
+                app.service.toLowerCase().includes(trimmed) ||
+                app.doctor.toLowerCase().includes(trimmed)
+            );
+            renderAdminTable(filtered);
+
+            if (filtered.length === 0) {
+                adminSuggestionsDropdown.innerHTML = `<div class="p-2 text-xs text-slate-400 text-center">No matching patient records found.</div>`;
+            } else {
+                adminSuggestionsDropdown.innerHTML = filtered.map(app => `
+                    <div onclick="selectAdminSuggestion(${app.originalIndex})" class="p-2.5 rounded-xl hover:bg-forest-800 transition cursor-pointer flex items-center justify-between">
+                        <div>
+                            <div class="text-xs font-semibold text-white">${app.patientName}</div>
+                            <div class="text-[10px] text-gold-300">${app.service} — <span class="text-cyan-400">${app.doctor}</span></div>
+                        </div>
+                        <span class="text-[10px] text-cyan-300 font-mono">${app.patientPhone}</span>
+                    </div>
+                `).join('');
+            }
+            adminSuggestionsDropdown.classList.remove('hidden');
+        }
+
+        function selectAdminSuggestion(originalIndex) {
+            adminSuggestionsDropdown.classList.add('hidden');
+            document.getElementById('adminSearchInput').value = bookedAppointments[originalIndex].patientName;
+            openPatientModal(originalIndex);
+        }
+
+        function renderAdminTable(dataToRender = bookedAppointments) {
+            const tbody = document.getElementById('adminAppointmentsTableBody');
+            document.getElementById('statTotalCount').innerText = bookedAppointments.length;
+            if (dataToRender.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-400">No matching appointments found.</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = dataToRender.map((app) => {
+                const actualIndex = bookedAppointments.findIndex(item => item.patientPhone === app.patientPhone && item.patientName === app.patientName);
+                return `
+                <tr onclick="openPatientModal(${actualIndex})" class="hover:bg-forest-900/80 transition cursor-pointer">
+                    <td class="p-4 font-semibold text-white">${app.patientName}</td>
+                    <td class="p-4 text-cyan-300 font-mono">${app.patientPhone}</td>
+                    <td class="p-4 text-gold-300">${app.service}</td>
+                    <td class="p-4">${app.doctor}</td>
+                    <td class="p-4 text-slate-300">${app.date}<br><span class="text-xs text-cyan-400">${app.time}</span></td>
+                </tr>
+            `;}).join('');
+        }
+    </script>
+</body>
+</html>

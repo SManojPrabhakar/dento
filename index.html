@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wave Dental Studio | Home</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="Wave Dental Studio.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: {
+                            950: '#061c14',
+                            900: '#09291e',
+                            800: '#0f3d2d',
+                            700: '#17523d',
+                            600: '#206b51',
+                        },
+                        gold: {
+                            400: '#fbe2b1',
+                            500: '#e8c274',
+                            600: '#d1a750',
+                            700: '#b08739'
+                        },
+                        cyan: {
+                            400: '#5eead4',
+                            500: '#38bdf8',
+                            600: '#0284c7'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #061c14;
+            color: #f8fafc;
+            position: relative;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fbe2b1 0%, #e8c274 50%, #d1a750 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #e8c274 0%, #d1a750 100%);
+        }
+        .glass-card {
+            background: rgba(15, 61, 45, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+        }
+        .glass-card:hover {
+            border-color: rgba(232, 194, 116, 0.65);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.35);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #061c14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #17523d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38bdf8;
+        }
+    </style>
+</head>
+<body class="bg-[#061c14] text-slate-100 antialiased selection:bg-gold-500 selection:text-forest-950">
+
+    <!-- Global Full-Page Fixed Watermark Layer (Visible across all scrolling sections) -->
+    <div class="fixed inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden">
+        <img src="Wave Dental Studio.png" alt="Full Page Watermark" class="w-[950px] max-w-none opacity-[0.60] select-none filter blur-[0.5px]">
+    </div>
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-forest-800 text-slate-200 text-xs py-2 px-4 border-b border-forest-700 relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-6">
+                <span><i class="fas fa-map-marker-alt text-gold-400 mr-2"></i> Dutt Island Siripuram junction, Visakhapatnam (Vizag)</span>
+                <span><i class="fas fa-phone-alt text-gold-400 mr-2"></i> +91 95052 90644</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="hover:text-gold-300 transition"><i class="fab fa-instagram text-gold-400 text-sm mr-1"></i> Instagram</a>
+                <a href="https://wa.me/919505290644" target="_blank" rel="noopener noreferrer" class="hover:text-gold-300 transition"><i class="fab fa-whatsapp text-gold-400 text-sm mr-1"></i> WhatsApp Support</a>
+                <span class="text-gold-300 font-medium">Mon - Sat: 9:00 AM - 8:00 PM</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header id="navbar" class="sticky top-0 z-50 transition-all duration-300 bg-forest-900/95 backdrop-blur-md border-b border-forest-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#home" class="flex items-center gap-3 group">
+               <div class="w-20 h-20 rounded-xl overflow-hidden group-hover:scale-105 transition flex items-center justify-center">
+                   <img src="Wave Dental Studio Logo.png" alt="Wave Dental Studio W Logo" class="w-full h-full object-cover">
+               </div>
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-1.5">
+                        <span class="font-serif text-xl tracking-wider font-bold gold-gradient-text">WAVE</span>
+                        <style>
+                            @keyframes spinSlow {
+                                from { transform: rotate(0deg); }
+                                to { transform: rotate(360deg); }
+                            }
+                            .animate-spin-slow {
+                                animation: spinSlow 8s linear infinite;
+                            }
+                        </style>
+                       <i class="fas fa-tooth text-2xl bg-gradient-to-br from-[#e2b866] via-[#bfa15f] to-[#2fb5c8] bg-clip-text text-transparent animate-spin-slow inline-block"></i>
+                    </div>
+                    <span class="text-[10px] tracking-[0.25em] text-[#2fb5c8] uppercase font-semibold">Dental Studio</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm">
+                <a href="#home" class="text-gold-400 hover:text-cyan-400 transition">Home</a>
+                <a href="#about" class="text-slate-300 hover:text-gold-400 transition">About</a>
+                <a href="#services" class="text-slate-300 hover:text-gold-400 transition">Services</a>
+                <a href="#doctors" class="text-slate-300 hover:text-gold-400 transition">Doctors</a>
+                <a href="#feedbacks" class="text-slate-300 hover:text-gold-400 transition">Feedbacks</a>
+            </nav>
+
+            <!-- CTA Actions -->
+            <div class="hidden md:flex items-center gap-4">
+                <button onclick="openBookingModal()" class="px-6 py-2.5 rounded-full gold-gradient-bg text-forest-950 font-semibold text-sm shadow-lg shadow-gold-500/20 hover:opacity-95 hover:scale-105 transition active:scale-95">
+                    <i class="fas fa-calendar-check mr-2"></i> Book Appointment
+                </button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="md:hidden text-2xl text-gold-400 focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden bg-forest-800 border-b border-forest-700 px-6 py-4 flex flex-col gap-4">
+            <a href="#home" class="mobile-link text-gold-400 font-medium py-1">Home</a>
+            <a href="#about" class="mobile-link text-slate-200 font-medium py-1">About</a>
+            <a href="#services" class="mobile-link text-slate-200 font-medium py-1">Services</a>
+            <a href="#doctors" class="mobile-link text-slate-200 font-medium py-1">Doctors</a>
+            <a href="#feedbacks" class="mobile-link text-slate-200 font-medium py-1">Feedbacks</a>
+            <button onclick="openBookingModal(); toggleMobileMenu();" class="w-full py-3 rounded-xl gold-gradient-bg text-forest-950 font-semibold text-sm shadow-md mt-2">
+                <i class="fas fa-calendar-check mr-2"></i> Book Appointment
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#061c14]/90 via-[#0f3d2d]/90 to-[#061c14]/90 py-20 z-10">
+        <!-- Background Ambient Glow Effects -->
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-[#38bdf8]/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/2 -right-40 w-96 h-96 bg-[#e8c274]/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <!-- Left Text Column -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-forest-800 border border-gold-500/30 text-gold-300 text-xs tracking-wider uppercase font-semibold">
+                    <i class="fas fa-crown text-gold-400"></i> Elite Aesthetic & Restorative Dentistry — VIZAG
+                </div>
+                <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-tight text-white">
+                    Redefining <span class="gold-gradient-text">Smiles</span> with Art & Science
+                </h1>
+                <p class="text-slate-200 text-lg sm:text-xl font-light max-w-2xl mx-auto lg:mx-0">
+                    Experience world-class dental haute couture at Wave Dental Studio in Visakhapatnam. Combining state-of-the-art technology, painless precision, and bespoke luxury care in a serene sea green oasis.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                    <button onclick="openBookingModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl gold-gradient-bg text-forest-950 font-bold text-base shadow-xl shadow-gold-500/20 hover:scale-105 transition flex items-center justify-center gap-3">
+                        <i class="fas fa-calendar-alt text-lg text-forest-950"></i> Schedule Consultation
+                    </button>
+                    <a href="#services" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-forest-800 hover:bg-forest-700 border border-forest-600 text-slate-100 font-semibold text-base transition flex items-center justify-center gap-3">
+                        <i class="fas fa-sparkles text-gold-400"></i> Explore Treatments
+                    </a>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="pt-8 border-t border-forest-700/60 grid grid-cols-3 gap-4 text-center lg:text-left">
+                    <div>
+                        <div class="font-serif text-2xl sm:text-3xl font-bold gold-gradient-text">15+</div>
+                        <div class="text-xs text-slate-300">Years of Excellence</div>
+                    </div>
+                    <div>
+                        <div class="font-serif text-2xl sm:text-3xl font-bold gold-gradient-text">10,000+</div>
+                        <div class="text-xs text-slate-300">Smiles Transformed</div>
+                    </div>
+                    <div>
+                        <div class="font-serif text-2xl sm:text-3xl font-bold gold-gradient-text">100%</div>
+                        <div class="text-xs text-slate-300">Painless Guarantee</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Visual Card Column / Fallback for Slow Network -->
+            <div class="lg:col-span-5 flex justify-center w-full">
+                <!-- Slow Network Educational Teeth Section (Hidden by default, shown on slow network or image error) -->
+                <div id="slowNetworkTeethSection" class="hidden w-full glass-card p-6 rounded-3xl border border-gold-500/40 space-y-4 animate-pulse">
+                    <div class="flex items-center justify-between border-b border-forest-700 pb-3">
+                        <div class="flex items-center gap-2 text-gold-400 text-sm font-semibold">
+                            <i class="fas fa-wifi text-rose-400"></i> Slow Connection Detected
+                        </div>
+                        <span class="text-[10px] bg-gold-500/20 text-gold-300 px-2 py-0.5 rounded-full border border-gold-500/30">Offline Educational Mode</span>
+                    </div>
+                    <h3 class="font-serif text-lg font-bold text-white">Detailed Guide: Types of Human Teeth</h3>
+                    <div class="space-y-3 text-xs text-slate-200">
+                        <div class="p-3 rounded-2xl bg-forest-900/80 border border-forest-700">
+                            <strong class="text-gold-300 block text-sm font-semibold mb-1">1. Incisors (8 total)</strong>
+                            <p class="text-slate-300">Front sharp, chisel-shaped teeth used for cutting and biting food into smaller manageable pieces.</p>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-forest-900/80 border border-forest-700">
+                            <strong class="text-gold-300 block text-sm font-semibold mb-1">2. Canines (4 total)</strong>
+                            <p class="text-slate-300">Pointy, cusp-shaped teeth situated next to incisors designed for tearing and gripping tough foods.</p>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-forest-900/80 border border-forest-700">
+                            <strong class="text-gold-300 block text-sm font-semibold mb-1">3. Premolars (8 total)</strong>
+                            <p class="text-slate-300">Transition teeth with flat surfaces positioned between canines and molars for crushing and grinding.</p>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-forest-900/80 border border-forest-700">
+                            <strong class="text-gold-300 block text-sm font-semibold mb-1">4. Molars (12 total including Wisdom teeth)</strong>
+                            <p class="text-slate-300">Large, broad back teeth specialized for thoroughly grinding and chewing food before swallowing.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Normal Hero Image Card -->
+                <div id="normalHeroImageContainer" class="relative w-full max-w-md">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-forest-600/60 group">
+                        <img id="heroClinicImg" src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop" alt="Dentist treating patient in dental chair" class="w-full h-[420px] object-cover group-hover:scale-105 transition duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-forest-900/90 via-forest-900/20 to-transparent"></div>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-tr from-[#e8c274]/25 to-[#38bdf8]/25 rounded-3xl blur-2xl -z-10 transform rotate-6"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-forest-900/90 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-cyan-400 font-semibold tracking-widest text-xs uppercase">The Wave Experience</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-white">Where Advanced Dentistry Meets Unrivaled Luxury</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-gold-500 to-cyan-400 mx-auto rounded-full"></div>
+                <p class="text-slate-200 text-base sm:text-lg font-light">
+                    Wave Dental Studio was founded with a singular vision: to transform dental visits into an indulgent, pampering wellness ritual without compromising on clinical perfection.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature Card 1 -->
+                <div class="glass-card p-8 rounded-3xl space-y-4 transition duration-300 hover:-translate-y-2">
+                    <div class="w-14 h-14 rounded-2xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-2xl border border-gold-500/40">
+                        <i class="fas fa-microscope text-gold-400"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white">State-of-the-Art Technology</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Equipped with AI-assisted diagnostics, CBCT 3D imaging, laser dentistry units, and same-day CEREC porcelain crowns crafted on-site.
+                    </p>
+                </div>
+
+                <!-- Feature Card 2 -->
+                <div class="glass-card p-8 rounded-3xl space-y-4 transition duration-300 hover:-translate-y-2">
+                    <div class="w-14 h-14 rounded-2xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-2xl border border-gold-500/40">
+                        <i class="fas fa-spa text-gold-400"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white">Luxury Patient Experience</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Enjoy noise-canceling VR relaxation headsets, aromatherapy scent diffusers, calming herbal teas, and private VIP recovery suites.
+                    </p>
+                </div>
+
+                <!-- Feature Card 3 -->
+                <div class="glass-card p-8 rounded-3xl space-y-4 transition duration-300 hover:-translate-y-2">
+                    <div class="w-14 h-14 rounded-2xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-2xl border border-gold-500/40">
+                        <i class="fas fa-shield-virus text-gold-400"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white">Sterile Precision & Safety</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Hospital-grade Class-B sterilization autoclaves, HEPA air filtration systems, and single-use sterile instruments for ultimate peace of mind.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-[#061c14]/90 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-gold-300 font-semibold tracking-widest text-xs uppercase">Bespoke Treatments</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-white">Our Signature Dental Services</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-gold-500 to-cyan-400 mx-auto rounded-full"></div>
+                <p class="text-slate-200 text-base sm:text-lg font-light">
+                    Tailored dental solutions designed to preserve natural tooth structure while delivering breathtaking aesthetic results.
+                </p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="glass-card rounded-3xl p-8 flex flex-col justify-between group transition duration-300 hover:-translate-y-1">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-12 h-12 rounded-2xl gold-gradient-bg text-forest-950 flex items-center justify-center font-bold text-xl">
+                                <i class="fas fa-tooth text-forest-950"></i>
+                            </div>
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-forest-800 text-gold-300 border border-gold-500/30">Duration: 60m</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold mb-3 text-white group-hover:text-gold-300 transition">Advanced Dental Implants</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            Permanent, titanium or zirconia teeth replacements that look, feel, and function exactly like your natural teeth with guided 3D surgery.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-forest-700/60 flex items-center justify-between">
+                        <span class="text-xs text-slate-300 font-medium">Starting from <strong class="text-gold-300">₹1,20,000</strong></span>
+                        <button onclick="openBookingModalWithService('Advanced Dental Implants')" class="text-xs font-semibold text-gold-400 hover:text-gold-300 flex items-center gap-1">
+                            Book Service <i class="fas fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass-card rounded-3xl p-8 flex flex-col justify-between group transition duration-300 hover:-translate-y-1">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-12 h-12 rounded-2xl gold-gradient-bg text-forest-950 flex items-center justify-center font-bold text-xl">
+                                <i class="fas fa-gem text-forest-950"></i>
+                            </div>
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-forest-800 text-gold-300 border border-gold-500/30">Duration: 2 Visits</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold mb-3 text-white group-hover:text-gold-300 transition">Porcelain Veneers</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            Ultra-thin, custom-crafted porcelain shells custom designed by master ceramists to correct chips, gaps, and severe discoloration.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-forest-700/60 flex items-center justify-between">
+                        <span class="text-xs text-slate-300 font-medium">Starting from <strong class="text-gold-300">₹25,000 / tooth</strong></span>
+                        <button onclick="openBookingModalWithService('Porcelain Veneers')" class="text-xs font-semibold text-gold-400 hover:text-gold-300 flex items-center gap-1">
+                            Book Service <i class="fas fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass-card rounded-3xl p-8 flex flex-col justify-between group transition duration-300 hover:-translate-y-1">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-12 h-12 rounded-2xl gold-gradient-bg text-forest-950 flex items-center justify-center font-bold text-xl">
+                                <i class="fas fa-smile-beam text-forest-950"></i>
+                            </div>
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-forest-800 text-gold-300 border border-gold-500/30">Duration: Custom</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold mb-3 text-white group-hover:text-gold-300 transition">Orthodontics & Invisalign</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            Discreet, crystal-clear aligners that gently straighten your teeth without traditional metal brackets or wires in record time.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-forest-700/60 flex items-center justify-between">
+                        <span class="text-xs text-slate-300 font-medium">Starting from <strong class="text-gold-300">₹1,50,000</strong></span>
+                        <button onclick="openBookingModalWithService('Orthodontics & Invisalign')" class="text-xs font-semibold text-gold-400 hover:text-gold-300 flex items-center gap-1">
+                            Book Service <i class="fas fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass-card rounded-3xl p-8 flex flex-col justify-between group transition duration-300 hover:-translate-y-1">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-12 h-12 rounded-2xl gold-gradient-bg text-forest-950 flex items-center justify-center font-bold text-xl">
+                                <i class="fas fa-bolt text-forest-950"></i>
+                            </div>
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-forest-800 text-gold-300 border border-gold-500/30">Duration: 45m</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold mb-3 text-white group-hover:text-gold-300 transition">Laser Dentistry</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            Painless gum contouring, cold sore treatment, and rapid cavity sterilizing powered by advanced dental diode lasers.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-forest-700/60 flex items-center justify-between">
+                        <span class="text-xs text-slate-300 font-medium">Starting from <strong class="text-gold-300">₹15,000</strong></span>
+                        <button onclick="openBookingModalWithService('Laser Dentistry')" class="text-xs font-semibold text-gold-400 hover:text-gold-300 flex items-center gap-1">
+                            Book Service <i class="fas fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="glass-card rounded-3xl p-8 flex flex-col justify-between group transition duration-300 hover:-translate-y-1">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-12 h-12 rounded-2xl gold-gradient-bg text-forest-950 flex items-center justify-center font-bold text-xl">
+                                <i class="fas fa-wand-magic-sparkles text-forest-950"></i>
+                            </div>
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-forest-800 text-gold-300 border border-gold-500/30">Duration: 90m</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold mb-3 text-white group-hover:text-gold-300 transition">Complete Smile Makeover</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            A comprehensive, multi-disciplinary transformation combining whitening, crowns, veneers, and gum balancing for red-carpet perfection.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-forest-700/60 flex items-center justify-between">
+                        <span class="text-xs text-slate-300 font-medium">Consultation Required</span>
+                        <button onclick="openBookingModalWithService('Complete Smile Makeover')" class="text-xs font-semibold text-gold-400 hover:text-gold-300 flex items-center gap-1">
+                            Book Service <i class="fas fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="glass-card rounded-3xl p-8 flex flex-col justify-between group transition duration-300 hover:-translate-y-1">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-12 h-12 rounded-2xl gold-gradient-bg text-forest-950 flex items-center justify-center font-bold text-xl">
+                                <i class="fas fa-shield-heart text-forest-950"></i>
+                            </div>
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-forest-800 text-gold-300 border border-gold-500/30">Duration: 60m</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold mb-3 text-white group-hover:text-gold-300 transition">Painless Root Canal</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            Advanced rotary endodontics with precision microscope imaging ensuring 100% pain-free infection removal in a single visit.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-forest-700/60 flex items-center justify-between">
+                        <span class="text-xs text-slate-300 font-medium">Starting from <strong class="text-gold-300">₹8,000</strong></span>
+                        <button onclick="openBookingModalWithService('Painless Root Canal')" class="text-xs font-semibold text-gold-400 hover:text-gold-300 flex items-center gap-1">
+                            Book Service <i class="fas fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ <!-- Doctors Section -->
+    <section id="doctors" class="py-24 bg-forest-900/90 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-cyan-400 font-semibold tracking-widest text-xs uppercase">Elite Clinical Team</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-white">Meet Our Master Dentists</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-gold-500 to-cyan-400 mx-auto rounded-full"></div>
+                <p class="text-slate-200 text-base sm:text-lg font-light">
+                    Globally acclaimed specialists dedicated to artistic precision, gentle touch, and uncompromising clinical standards.
+                </p>
+            </div>
+
+            <!-- Changed grid-cols-1 md:grid-cols-3 to md:grid-cols-2 and centered the cards nicely -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Doctor 1: Dr. Alistair Vance -->
+                <div class="glass-card rounded-3xl overflow-hidden group flex flex-col justify-between">
+                    <div class="relative h-72 bg-forest-800 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=800&auto=format&fit=crop" onerror="this.src='https://placehold.co/600x600/061c14/e8c274?text=Dr.+Alistair+Vance'" alt="Dr. Alistair Vance" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-forest-900 via-transparent to-transparent"></div>
+                        <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-forest-900/90 backdrop-blur-md text-gold-300 text-xs font-semibold border border-gold-500/40">Chief Surgeon</span>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <h3 class="font-serif text-xl font-bold text-white">Dr. Alistair Vance</h3>
+                            <p class="text-cyan-400 text-sm font-medium">Chief Implantologist & Cosmetic Dentist</p>
+                        </div>
+                        <p class="text-slate-300 text-xs leading-relaxed">
+                            With over 18 years of Ivy League training and European fellowship experience in full-mouth reconstructions.
+                        </p>
+                        <div class="pt-2">
+                            <button onclick="openBookingModalWithDoctor('Dr. Alistair Vance')" class="w-full py-2.5 rounded-xl bg-forest-800 hover:bg-forest-700 text-gold-300 font-semibold text-xs border border-gold-500/40 transition flex items-center justify-center gap-2">
+                                <i class="fas fa-calendar-plus"></i> Consult Dr. Vance
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doctor 2: Dr. Maya Lin -->
+                <div class="glass-card rounded-3xl overflow-hidden group flex flex-col justify-between">
+                    <div class="relative h-72 bg-forest-800 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1594824813576-9ed220fa6302?q=80&w=800&auto=format&fit=crop" onerror="this.src='https://placehold.co/600x600/061c14/e8c274?text=Dr.+Maya+Lin'" alt="Dr. Maya Lin" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-forest-900 via-transparent to-transparent"></div>
+                        <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-forest-900/90 backdrop-blur-md text-gold-300 text-xs font-semibold border border-gold-500/40">Orthodontist</span>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <h3 class="font-serif text-xl font-bold text-white">Dr. Maya Lin</h3>
+                            <p class="text-cyan-400 text-sm font-medium">Orthodontics & Invisalign Specialist</p>
+                        </div>
+                        <p class="text-slate-300 text-xs leading-relaxed">
+                            Certified Diamond Invisalign provider specializing in rapid adult aligner therapy and harmonious facial aesthetics.
+                        </p>
+                        <div class="pt-2">
+                            <button onclick="openBookingModalWithDoctor('Dr. Maya Lin')" class="w-full py-2.5 rounded-xl bg-forest-800 hover:bg-forest-700 text-gold-300 font-semibold text-xs border border-gold-500/40 transition flex items-center justify-center gap-2">
+                                <i class="fas fa-calendar-plus"></i> Consult Dr. Lin
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials / Feedbacks Section -->
+    <section id="feedbacks" class="py-24 bg-[#061c14]/90 relative z-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-gold-300 font-semibold tracking-widest text-xs uppercase">Patient Testimonials</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-white">Loved by Our Elite Clients</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-gold-500 to-cyan-400 mx-auto rounded-full"></div>
+                <p class="text-slate-200 text-base sm:text-lg font-light">
+                    Read genuine reflections from patients who trusted Wave Dental Studio with their smiles.
+                </p>
+            </div>
+
+            <!-- Feedbacks Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="glass-card p-8 rounded-3xl space-y-6 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex text-gold-400 text-sm gap-1">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-slate-200 text-sm italic leading-relaxed">
+                            "Wave Dental Studio in Vizag is unlike any clinic I've ever visited. From the VR headsets during my crown procedure to Dr. Vance's immaculate precision, it felt like a 5-star resort."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-forest-700/60">
+                        <div class="w-12 h-12 rounded-full gold-gradient-bg flex items-center justify-center font-bold text-forest-950 font-serif">
+                            ES
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-sm text-white">Eleanor Sterling</h4>
+                            <p class="text-xs text-slate-300">Visakhapatnam, AP</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="glass-card p-8 rounded-3xl space-y-6 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex text-gold-400 text-sm gap-1">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-slate-200 text-sm italic leading-relaxed">
+                            "I completed my Invisalign treatment with Dr. Maya Lin. The entire journey was seamless, painless, and my teeth look astonishing. Truly world-class standards!"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-forest-700/60">
+                        <div class="w-12 h-12 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold font-serif border border-cyan-500/40">
+                            JD
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-sm text-white">Jagdish Varma</h4>
+                            <p class="text-xs text-slate-300">MVP Colony, Vizag</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="glass-card p-8 rounded-3xl space-y-6 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex text-gold-400 text-sm gap-1">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-slate-200 text-sm italic leading-relaxed">
+                            "The ambiance is serene and luxurious. Dr. Rohan Mehta performed my root canal in 45 minutes with absolute zero discomfort. Best dental clinic in India!"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-forest-700/60">
+                        <div class="w-12 h-12 rounded-full gold-gradient-bg flex items-center justify-center font-bold text-forest-950 font-serif">
+                            SM
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-sm text-white">Sravani Murthy</h4>
+                            <p class="text-xs text-slate-300">Beach Road, Vizag</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment Modal / Section Overlay with Watermark Inside -->
+    <div id="bookingModal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#061c14]/85 backdrop-blur-md p-4 hidden">
+        <div class="glass-card w-full max-w-2xl rounded-3xl p-8 relative border border-gold-500/40 shadow-2xl overflow-y-auto max-h-[90vh] overflow-hidden">
+            <!-- Modal Background Watermark Layer -->
+            <div class="absolute inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden">
+                <img src="Wave Dental Studio.png" alt="Modal Watermark" class="w-[500px] max-w-none opacity-[0.15] select-none filter blur-[0.5px]">
+            </div>
+
+            <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-slate-300 hover:text-gold-300 text-xl font-bold transition z-20">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="text-center mb-8 space-y-2 relative z-10">
+                <span class="text-gold-300 font-semibold tracking-widest text-xs uppercase">VIP Reservation</span>
+                <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white">Book Your Appointment</h3>
+                <p class="text-slate-300 text-xs">Fill in your details and our concierge will confirm your slot instantly.</p>
+            </div>
+
+            <!-- Booking Form -->
+           <!-- Booking Form -->
+<form id="appointmentForm" onsubmit="handleBookingSubmit(event)" class="space-y-5 relative z-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <!-- Full Name Floating Input -->
+        <div class="relative pt-2">
+            <input type="text" id="patientName" required placeholder="Full Name" class="w-full px-4 pt-5 pb-3 rounded-xl bg-forest-900 border border-forest-700 outline-none focus:border-gold-400 text-white text-sm placeholder:text-transparent shadow-none peer">
+            <label for="patientName" class="absolute left-4 top-4 text-slate-400 text-xs transition-all duration-200 pointer-events-none peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-slate-400 peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-gold-400 peer-not-placeholder-shown:top-1.5 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-gold-400 bg-forest-900 px-1">Full Name</label>
+        </div>
+        <!-- Phone Number Floating Input -->
+        <div class="relative pt-2">
+            <input type="tel" id="patientPhone" required maxlength="10" placeholder="Phone Number (10 Digits)" class="w-full px-4 pt-5 pb-3 rounded-xl bg-forest-900 border border-forest-700 outline-none focus:border-gold-400 text-white text-sm placeholder:text-transparent shadow-none peer">
+            <label for="patientPhone" class="absolute left-4 top-4 text-slate-400 text-xs transition-all duration-200 pointer-events-none peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-slate-400 peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-gold-400 peer-not-placeholder-shown:top-1.5 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-gold-400 bg-forest-900 px-1">Phone Number (10 Digits)</label>
+        </div>
+    </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <!-- Select Service Floating Select -->
+                    <div class="relative pt-2">
+                        <select id="serviceSelect" class="peer w-full px-4 pt-5 pb-3 rounded-xl bg-forest-900 border border-forest-700 outline-none focus:border-gold-400 text-white text-sm appearance-none shadow-none">
+                            <option value="Advanced Dental Implants">Advanced Dental Implants</option>
+                            <option value="Porcelain Veneers">Porcelain Veneers</option>
+                            <option value="Orthodontics & Invisalign">Orthodontics & Invisalign</option>
+                            <option value="Laser Dentistry">Laser Dentistry</option>
+                            <option value="Complete Smile Makeover">Complete Smile Makeover</option>
+                            <option value="Painless Root Canal">Painless Root Canal</option>
+                            <option value="General Consultation">General Consultation</option>
+                        </select>
+                        <label for="serviceSelect" class="absolute left-4 top-1.5 text-xs text-gold-400 pointer-events-none bg-forest-900 px-1">Select Service</label>
+                        <div class="absolute right-4 top-5 text-slate-400 pointer-events-none"><i class="fas fa-chevron-down text-xs"></i></div>
+                    </div>
+                    <!-- Preferred Doctor Floating Select -->
+                    <div class="relative pt-2">
+                        <select id="doctorSelect" class="peer w-full px-4 pt-5 pb-3 rounded-xl bg-forest-900 border border-forest-700 outline-none focus:border-gold-400 text-white text-sm appearance-none shadow-none">
+    <option value="Any Available Expert">Any Available Expert</option>
+    <option value="Dr. Alistair Vance">Dr. Alistair Vance</option>
+    <option value="Dr. Maya Lin">Dr. Maya Lin</option>
+</select>
+                        <label for="doctorSelect" class="absolute left-4 top-1.5 text-xs text-gold-400 pointer-events-none bg-forest-900 px-1">Preferred Doctor</label>
+                        <div class="absolute right-4 top-5 text-slate-400 pointer-events-none"><i class="fas fa-chevron-down text-xs"></i></div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <!-- Preferred Date Floating Input -->
+                    <div class="relative pt-2">
+                        <input type="date" id="appointmentDate" required class="peer w-full px-4 pt-5 pb-3 rounded-xl bg-forest-900 border border-forest-700 outline-none focus:border-gold-400 text-white text-sm shadow-none">
+                        <label for="appointmentDate" class="absolute left-4 top-1.5 text-xs text-gold-400 pointer-events-none bg-forest-900 px-1">Preferred Date</label>
+                    </div>
+                    <!-- Preferred Time Slot Floating Select -->
+                    <div class="relative pt-2">
+                        <select id="timeSlot" class="peer w-full px-4 pt-5 pb-3 rounded-xl bg-forest-900 border border-forest-700 outline-none focus:border-gold-400 text-white text-sm appearance-none shadow-none">
+                            <option value="09:00 AM - 10:30 AM">09:00 AM - 10:30 AM</option>
+                            <option value="11:00 AM - 12:30 PM">11:00 AM - 12:30 PM</option>
+                            <option value="02:00 PM - 03:30 PM">02:00 PM - 03:30 PM</option>
+                            <option value="04:30 PM - 06:00 PM">04:30 PM - 06:00 PM</option>
+                            <option value="06:30 PM - 08:00 PM">06:30 PM - 08:00 PM</option>
+                        </select>
+                        <label for="timeSlot" class="absolute left-4 top-1.5 text-xs text-gold-400 pointer-events-none bg-forest-900 px-1">Preferred Time Slot</label>
+                        <div class="absolute right-4 top-5 text-slate-400 pointer-events-none"><i class="fas fa-chevron-down text-xs"></i></div>
+                    </div>
+                </div>
+
+                <!-- Special Notes Floating Textarea -->
+                <div class="relative pt-2">
+                    <textarea id="patientNotes" rows="2" placeholder=" " class="peer w-full px-4 pt-5 pb-3 rounded-xl bg-forest-900 border border-forest-700 outline-none focus:border-gold-400 text-white text-sm placeholder-transparent shadow-none"></textarea>
+                    <label for="patientNotes" class="absolute left-4 top-5 text-slate-400 text-xs transition-all duration-200 pointer-events-none peer-placeholder-shown:top-6 peer-placeholder-shown:text-sm peer-placeholder-shown:text-slate-400 peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-gold-400 bg-forest-900 px-1">Special Notes or Dental Concerns</label>
+                </div>
+
+                <!-- Phone Length Error Warning Box -->
+                <div id="phoneErrorWarning" class="hidden p-4 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-200 text-xs flex items-center gap-3">
+                    <i class="fas fa-exclamation-triangle text-lg text-rose-400"></i>
+                    <div>
+                        <strong class="font-semibold block text-rose-100">Invalid Phone Number!</strong>
+                        <span>Please enter exactly a 10-digit phone number.</span>
+                    </div>
+                </div>
+
+                <!-- Error Warning Box for Overlaps -->
+                <div id="overlapWarning" class="hidden p-4 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-200 text-xs flex items-center gap-3">
+                    <i class="fas fa-exclamation-triangle text-lg text-rose-400"></i>
+                    <div>
+                        <strong class="font-semibold block text-rose-100">Time Slot Unavailable / Overlap!</strong>
+                        <span>The selected doctor already has a confirmed appointment at this date and time slot. Please choose another slot or doctor.</span>
+                    </div>
+                </div>
+
+                <button type="submit" id="submitBtn" class="w-full py-4 rounded-xl gold-gradient-bg text-forest-950 font-bold text-base shadow-lg shadow-gold-500/20 hover:opacity-95 transition mt-2 flex items-center justify-center gap-2">
+                    <span>Confirm VIP Reservation</span>
+                </button>
+            </form>
+
+            <!-- Loading Spinner State (Hidden by default) -->
+            <div id="bookingLoading" class="hidden text-center py-12 space-y-6 relative z-10">
+                <div class="relative w-16 h-16 mx-auto">
+                    <div class="absolute inset-0 rounded-full border-4 border-forest-700"></div>
+                    <div class="absolute inset-0 rounded-full border-4 border-gold-400 border-t-transparent animate-spin"></div>
+                </div>
+                <div class="space-y-2">
+                    <h4 class="font-serif text-xl font-bold text-white">Processing Reservation...</h4>
+                    <p class="text-slate-300 text-xs">Checking doctor availability and dispatching concierge notification...</p>
+                </div>
+            </div>
+
+            <!-- Success Confirmation State (Hidden by default) -->
+            <div id="bookingSuccess" class="hidden text-center py-12 space-y-6 relative z-10">
+                <div class="w-20 h-20 rounded-full bg-green-500/20 text-green-400 text-3xl flex items-center justify-center mx-auto border border-green-500/30">
+                    <i class="fas fa-check"></i>
+                </div>
+                <div class="space-y-2">
+                    <h4 class="font-serif text-2xl font-bold text-white">Reservation Confirmed!</h4>
+                    <p class="text-slate-200 text-sm max-w-md mx-auto">
+                        Thank you, <strong id="confName" class="text-gold-300"></strong>. Your appointment for <strong id="confService" class="text-cyan-400"></strong> has been successfully booked. A confirmation WhatsApp message has been dispatched to the clinic concierge.
+                    </p>
+                </div>
+                <div class="flex items-center justify-center pt-4">
+                    <button onclick="closeBookingModal()" class="px-8 py-3 rounded-xl gold-gradient-bg text-forest-950 font-semibold text-sm shadow-lg transition">
+                        Close Window
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp & Instagram Buttons -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
+        <!-- Instagram Link Badge -->
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="w-14 h-14 rounded-full gold-gradient-bg text-forest-950 flex items-center justify-center shadow-2xl hover:scale-110 transition group relative" title="Chat on WhatsApp">
+            <i class="fab fa-instagram text-xl font-bold"></i>
+            <span class="absolute right-16 bg-forest-900 text-slate-100 px-3 py-1 rounded-lg text-xs font-medium shadow-md opacity-0 group-hover:opacity-100 transition pointer-events-none whitespace-nowrap border border-forest-700">Chat with Concierge</span>
+        </a>
+        <!-- WhatsApp Direct Chat Button -->
+        <a href="https://wa.me/919505290644?text=Hello%20Wave%20Dental%20Studio%20Vizag,%20I%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="w-14 h-14 rounded-full gold-gradient-bg text-forest-950 flex items-center justify-center shadow-2xl hover:scale-110 transition group relative" title="Chat on WhatsApp">
+            <i class="fab fa-whatsapp text-2xl font-bold"></i>
+            <span class="absolute right-16 bg-forest-900 text-slate-100 px-3 py-1 rounded-lg text-xs font-medium shadow-md opacity-0 group-hover:opacity-100 transition pointer-events-none whitespace-nowrap border border-forest-700">Chat with Concierge</span>
+        </a>
+
+        <!-- Facebook Direct Chat Button -->
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-14 h-14 rounded-full gold-gradient-bg text-forest-950 flex items-center justify-center shadow-2xl hover:scale-110 transition group relative" title="Chat on WhatsApp">
+            <i class="fab fa-facebook text-xl font-bold"></i>
+            <span class="absolute right-16 bg-forest-900 text-slate-100 px-3 py-1 rounded-lg text-xs font-medium shadow-md opacity-0 group-hover:opacity-100 transition pointer-events-none whitespace-nowrap border border-forest-700">Chat with Concierge</span>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-[#061c14]/90 border-t border-forest-800 pt-16 pb-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-forest-900">
+            <!-- Brand Column -->
+            <div class="space-y-4">
+                <a href="#home" class="flex items-center gap-3">
+                    <div class="w-16 h-16 rounded-xl flex items-center justify-center">
+                        <img src="Wave Dental Studio Logo.png" alt="Wave Dental Studio W Logo" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-serif text-lg tracking-wider font-bold gold-gradient-text">WAVE</span>
+                        <span class="text-[9px] tracking-[0.2em] text-cyan-400 uppercase font-semibold">Dental Studio</span>
+                    </div>
+                </a>
+                <p class="text-slate-300 text-xs leading-relaxed">
+                    The pinnacle of aesthetic dental artistry and bespoke patient wellness. Redefining smiles in Visakhapatnam.
+                </p>
+                <div class="flex items-center gap-3 pt-2">
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-forest-900 border border-forest-700 flex items-center justify-center text-slate-200 hover:text-gold-300 transition"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/919505290644" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-forest-900 border border-forest-700 flex items-center justify-center text-slate-200 hover:text-green-400 transition"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-forest-900 border border-forest-700 flex items-center justify-center text-slate-200 hover:text-cyan-400 transition"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 class="font-semibold text-sm text-white mb-4 tracking-wider uppercase">Quick Links</h4>
+                <ul class="space-y-2 text-xs text-slate-300 font-medium">
+                    <li><a href="#home" class="hover:text-gold-300 transition">Home</a></li>
+                    <li><a href="#about" class="hover:text-gold-300 transition">About Studio</a></li>
+                    <li><a href="#services" class="hover:text-gold-300 transition">Treatments & Services</a></li>
+                    <li><a href="#doctors" class="hover:text-gold-300 transition">Expert Doctors</a></li>
+                    <li><a href="#feedbacks" class="hover:text-gold-300 transition">Patient Feedbacks</a></li>
+                </ul>
+            </div>
+
+            <!-- Treatments -->
+            <div>
+                <h4 class="font-semibold text-sm text-white mb-4 tracking-wider uppercase">Signature Care</h4>
+                <ul class="space-y-2 text-xs text-slate-300 font-medium">
+                    <li><a href="#services" class="hover:text-gold-300 transition">Advanced Dental Implants</a></li>
+                    <li><a href="#services" class="hover:text-gold-300 transition">Porcelain Veneers</a></li>
+                    <li><a href="#services" class="hover:text-gold-300 transition">Invisalign & Orthodontics</a></li>
+                    <li><a href="#services" class="hover:text-gold-300 transition">Laser Dentistry</a></li>
+                    <li><a href="#services" class="hover:text-gold-300 transition">Complete Smile Makeover</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact & Hours -->
+            <div class="space-y-3">
+                <h4 class="font-semibold text-sm text-white mb-4 tracking-wider uppercase">Studio Hours & Location</h4>
+                <p class="text-xs text-slate-300"><strong class="text-white">Monday - Saturday:</strong> 9:00 AM - 8:00 PM</p>
+                <p class="text-xs text-slate-300"><strong class="text-white">Sunday:</strong> By Appointment Only</p>
+                <p class="text-xs text-slate-300 pt-2"><i class="fas fa-map-marker-alt text-gold-400 mr-2"></i> Dutt Island Siripuram junction, Visakhapatnam(Vizag)</p>
+                <p class="text-xs text-slate-300"><i class="fas fa-phone-alt text-cyan-400 mr-2"></i> +91 95052 90644</p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+            <p>&copy; 2026 Wave Dental Studio Vizag. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.add('hidden');
+        }
+
+        // Close mobile menu when link is clicked
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Network Speed / Connection check to display Types of Teeth details on slow connection
+        window.addEventListener('load', () => {
+            const heroImg = document.getElementById('heroClinicImg');
+            const normalCard = document.getElementById('normalHeroImageContainer');
+            const slowSection = document.getElementById('slowNetworkTeethSection');
+
+            // Check if connection is slow (navigator.connection) or if image fails to load
+            let isSlow = false;
+            if (navigator.connection) {
+                const effectiveType = navigator.connection.effectiveType;
+                if (effectiveType === 'slow-2g' || effectiveType === '2g' || effectiveType === '3g' || navigator.connection.saveData) {
+                    isSlow = true;
+                }
+            }
+
+            heroImg.onerror = () => {
+                isSlow = true;
+                showSlowNetworkTeeth();
+            };
+
+            if (isSlow) {
+                showSlowNetworkTeeth();
+            }
+
+            function showSlowNetworkTeeth() {
+                normalCard.classList.add('hidden');
+                slowSection.classList.remove('hidden');
+                slowSection.classList.remove('animate-pulse');
+            }
+        });
+
+        // In-memory store for booked appointments to check time overlaps
+        let bookedAppointments = [
+            { doctor: "Dr. Alistair Vance", date: "2026-06-01", time: "09:00 AM - 10:30 AM" },
+            { doctor: "Dr. Maya Lin", date: "2026-06-01", time: "11:00 AM - 12:30 PM" }
+        ];
+
+        // Booking Modal Logic
+        const bookingModal = document.getElementById('bookingModal');
+        const appointmentForm = document.getElementById('appointmentForm');
+        const bookingLoading = document.getElementById('bookingLoading');
+        const bookingSuccess = document.getElementById('bookingSuccess');
+        const overlapWarning = document.getElementById('overlapWarning');
+        const phoneErrorWarning = document.getElementById('phoneErrorWarning');
+
+        function openBookingModal() {
+            bookingModal.classList.remove('hidden');
+            appointmentForm.classList.remove('hidden');
+            bookingLoading.classList.add('hidden');
+            bookingSuccess.classList.add('hidden');
+            overlapWarning.classList.add('hidden');
+            phoneErrorWarning.classList.add('hidden');
+            appointmentForm.reset();
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('appointmentDate').min = today;
+            document.getElementById('appointmentDate').value = today;
+        }
+
+        function openBookingModalWithService(serviceName) {
+            openBookingModal();
+            document.getElementById('serviceSelect').value = serviceName;
+        }
+
+        function openBookingModalWithDoctor(doctorName) {
+            openBookingModal();
+            document.getElementById('doctorSelect').value = doctorName;
+        }
+
+        function closeBookingModal() {
+            bookingModal.classList.add('hidden');
+        }
+
+        function handleBookingSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('patientName').value;
+            const phone = document.getElementById('patientPhone').value.trim();
+            const service = document.getElementById('serviceSelect').value;
+            const doctor = document.getElementById('doctorSelect').value;
+            const date = document.getElementById('appointmentDate').value;
+            const time = document.getElementById('timeSlot').value;
+            const notes = document.getElementById('patientNotes').value;
+
+            // Validate phone number length (must be exactly 10 digits and numeric)
+            const phoneDigitsOnly = phone.replace(/\D/g, '');
+            if (phoneDigitsOnly.length !== 10) {
+                phoneErrorWarning.classList.remove('hidden');
+                overlapWarning.classList.add('hidden');
+                return;
+            } else {
+                phoneErrorWarning.classList.add('hidden');
+            }
+
+            // Check for time overlap if doctor is specifically chosen
+            if (doctor !== "Any Available Expert") {
+                const isOverlap = bookedAppointments.some(appt => appt.doctor === doctor && appt.date === date && appt.time === time);
+                if (isOverlap) {
+                    overlapWarning.classList.remove('hidden');
+                    return; // Stop submission due to time overlap
+                }
+            }
+
+            // Hide form and show loading spinner with circular progress
+            overlapWarning.classList.add('hidden');
+            phoneErrorWarning.classList.add('hidden');
+            appointmentForm.classList.add('hidden');
+            bookingLoading.classList.remove('hidden');
+
+            setTimeout(() => {
+                // No overlap, proceed with successful booking
+                bookedAppointments.push({ doctor, date, time });
+
+                document.getElementById('confName').innerText = name;
+                document.getElementById('confService').innerText = service;
+
+                bookingLoading.classList.add('hidden');
+                bookingSuccess.classList.remove('hidden');
+
+                // Send automated WhatsApp message via Official WhatsApp Business API endpoint in the background
+                sendWhatsAppCloudAPI({
+                    patientName: name,
+                    patientPhone: phone,
+                    service: service,
+                    doctor: doctor,
+                    date: date,
+                    time: time,
+                    notes: notes
+                });
+            }, 1200); // 1.2 seconds smooth loading spinner duration
+        }
+
+        async function sendWhatsAppCloudAPI(apptData) {
+            // Meta WhatsApp Cloud API configuration
+            const WHATSAPP_API_URL = "https://graph.facebook.com/v17.0/1439637349228434/messages";
+            const ACCESS_TOKEN = "EAAN0r2yDKuABS1kSRHDLFVP70jgdM82763dPA2yVeIDsx2mq16nYkw59IUdBZBSLQN9pkL65aYPhb4og4o7y6sb20NZByGrHtmwZAjwSzJdzCA8n0qlYDZCtKUxv1UxPdq8zYJHE8xZAwEhSS98Luq746OuZAWmbFpsNuEjjVeAdHe6gEmR4QpZBFcGMHtFXdZBCL3iKdGxQGum9TFEgBPJDGMwzcspulWInDxsbYuZCacbpau3qSF02zGZBlKZBr2otWzPzsYvHdP3N3s9QoNeOUq0Prpz";
+            
+            // Your exact verified test number from the Meta dashboard (without '+' sign)
+            const TEST_RECIPIENT_PHONE = "919505290644";
+
+            // Using Meta's default sandbox template 'hello_world' which is pre-approved for all new apps
+            const templatePayload = {
+                messaging_product: "whatsapp",
+                to: TEST_RECIPIENT_PHONE,
+                type: "template",
+                template: {
+                    name: "hello_world",
+                    language: {
+                        code: "en_US"
+                    }
+                }
+            };
+
+            try {
+                const response = await fetch(WHATSAPP_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${ACCESS_TOKEN}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(templatePayload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error("Meta API Error Details:", errorData);
+                    throw new Error(errorData.error?.message || "API request failed");
+                }
+                
+                console.log("WhatsApp test template message successfully dispatched!");
+            } catch (err) {
+                console.error("Dispatch failed:", err.message);
+            }
+        }
+
+        // Close modal when clicking outside of card
+        bookingModal.addEventListener('click', (e) => {
+            if (e.target === bookingModal) {
+                closeBookingModal();
+            }
+        });
+    </script>
+</body>
+</html>
